@@ -1,14 +1,3 @@
-/*
- * Despues de la configuración todos los leds deben quedar apagados
- * Prender un led cualquiera
- * Apagar un led cualquiera
- * Prender y apagar algunos leds
- * Prender todos los leds juntos
- * Consultar el estado de un led apagado
- * Consultar el estado de un led encendido
- * Revisar los límites de los parámetros
- * Probar valores inválidos para los parámetros
- */
 #include "unity.h"
 #include "leds.h"
 #include <string.h>
@@ -38,8 +27,7 @@ void setUp(void)
     memset(error.funcion, 0, sizeof(error.funcion));
     LedsCreate(&puertoVirtual, RegistrarMensaje);
 }
-//tearDown  se ejecuta al final de las pruebas
-//suiteSetUp  se ejecuta una sola vez al inicio de las pruebas
+
 /* Despues de la configuración todos los leds deben quedar apagados */
 void test_todos_los_leds_inician_apagados(void)
 {
@@ -211,15 +199,3 @@ void test_parametro_limite_inferior_LedsIsOff(void)
     TEST_ASSERT_EQUAL(0, LedsIsOff(LED_LIMITE_INFERIOR));
     TEST_ASSERT_EQUAL(1, LedsIsOn(LED_LIMITE_INFERIOR));
 }
-
-/*
-  Las 4 son mandatorias
- * Prender todos los led juntos
- * Apagar todos los leds juntos
- * Consultar el estado de un led apagado
- * Consultar el estado de un led encendido
- 
- Estas son optativas
- * Revisar los valores limites de los parametros
- * Probar valores invalidos para los parametros
-*/
