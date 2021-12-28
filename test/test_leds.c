@@ -65,7 +65,7 @@ void test_error_en_parametro_LedsOn_max(void)
 {
     LedsOn(17);
     TEST_ASSERT_EQUAL(0, error.gravedad);
-    TEST_ASSERT_EQUAL_STRING("LedsOn", error.funcion);
+    TEST_ASSERT_EQUAL_STRING("LedToMask", error.funcion);
 }
 
 /* Probar valores inválidos para los parámetros de LedsOn*/
@@ -73,7 +73,7 @@ void test_error_en_parametro_LedsOn_min(void)
 {
     LedsOn(0);
     TEST_ASSERT_EQUAL(0, error.gravedad);
-    TEST_ASSERT_EQUAL_STRING("LedsOn", error.funcion);
+    TEST_ASSERT_EQUAL_STRING("LedToMask", error.funcion);
 }
 
 /* Probar valores inválidos para los parámetros de LedsOff*/
@@ -81,7 +81,7 @@ void test_error_en_parametro_LedsOff_max(void)
 {
     LedsOff(17);
     TEST_ASSERT_EQUAL(0, error.gravedad);
-    TEST_ASSERT_EQUAL_STRING("LedsOff", error.funcion);
+    TEST_ASSERT_EQUAL_STRING("LedToMask", error.funcion);
 }
 
 /* Probar valores inválidos para los parámetros de LedsOff*/
@@ -89,7 +89,7 @@ void test_error_en_parametro_LedsOff_min(void)
 {
     LedsOff(0);
     TEST_ASSERT_EQUAL(0, error.gravedad);
-    TEST_ASSERT_EQUAL_STRING("LedsOff", error.funcion);
+    TEST_ASSERT_EQUAL_STRING("LedToMask", error.funcion);
 }
 /* Prender todos los led juntos */ 
 void test_prender_todos_los_led_juntos(void)
@@ -129,7 +129,7 @@ void test_error_en_parametro_LedsIsOff_max(void)
 {
     TEST_ASSERT_EQUAL(-1, LedsIsOff(17));
     TEST_ASSERT_EQUAL(0, error.gravedad);
-    TEST_ASSERT_EQUAL_STRING("LedsIsOff", error.funcion);
+    TEST_ASSERT_EQUAL_STRING("LedToMask", error.funcion);
 }
 
 /* Probar valores inválidos para los parámetros de LedsIsOff*/
@@ -137,7 +137,7 @@ void test_error_en_parametro_LedsIsOff_min(void)
 {
     TEST_ASSERT_EQUAL(-1, LedsIsOff(0));
     TEST_ASSERT_EQUAL(0, error.gravedad);
-    TEST_ASSERT_EQUAL_STRING("LedsIsOff", error.funcion);
+    TEST_ASSERT_EQUAL_STRING("LedToMask", error.funcion);
 }
 
 /* Probar valores inválidos para los parámetros de LedsIsOn*/
@@ -145,7 +145,7 @@ void test_error_en_parametro_LedsIsOn_max(void)
 {
     TEST_ASSERT_EQUAL(-1, LedsIsOn(17));
     TEST_ASSERT_EQUAL(0, error.gravedad);
-    TEST_ASSERT_EQUAL_STRING("LedsIsOn", error.funcion);
+    TEST_ASSERT_EQUAL_STRING("LedToMask", error.funcion);
 }
 
 /* Probar valores inválidos para los parámetros de LedsIsOn*/
@@ -153,7 +153,7 @@ void test_error_en_parametro_LedsIsOn_min(void)
 {
     TEST_ASSERT_EQUAL(-1, LedsIsOn(0));
     TEST_ASSERT_EQUAL(0, error.gravedad);
-    TEST_ASSERT_EQUAL_STRING("LedsIsOn", error.funcion);
+    TEST_ASSERT_EQUAL_STRING("LedToMask", error.funcion);
 }
 
 /* Probar limite superior LedOn*/

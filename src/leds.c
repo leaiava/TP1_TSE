@@ -3,13 +3,24 @@
 #define LEDS_ALL_OFF 0x0000
 #define LEDS_OFFSET 1
 #define LED_ON_STATE 1
+#define LED_OFF_STATE   0
+#define LED_MIN         1
+#define LED_MAX         16
+#define NO_LED          0
+#define LED_NUM_ERROR   -1
 
 static uint16_t *puerto;
 static logger_t RegistrarError;
 
 static uint16_t LedToMask(int led)
 {
-    return (LED_ON_STATE << (led -LEDS_OFFSET));
+    if ((led>= LED_MIN ) && (led<= LED_MAX))
+        {
+        return (LED_ON_STATE << (led -LEDS_OFFSET));
+        }
+    
+    RegistrarError(0, __FUNCTION__, __LINE__ , "Numero de led invalido");
+    return NO_LED;
 }
 
 void LedsCreate(uint16_t *direccion, logger_t logger)
@@ -21,26 +32,12 @@ void LedsCreate(uint16_t *direccion, logger_t logger)
 
 void LedsOn(int led)
 {
-    if ((led>= 1 ) && (led<= 16))
-    {
-        *puerto |= LedToMask(led);
-    }
-    else
-    {
-        RegistrarError(0, __FUNCTION__, __LINE__ , "Numero de led invalido");
-    }
+    *puerto |= LedToMask(led);
 }
 
 void LedsOff(int led)
 {
-    if ((led>= 1 ) && (led<= 16))
-    {
-        *puerto &= ~LedToMask(led);
-    }
-    else
-    {
-        RegistrarError(0, __FUNCTION__, __LINE__ , "Numero de led invalido");
-    }
+    *puerto &= ~LedToMask(led);
 }
 
 void LedsOnAll(void)
@@ -55,32 +52,23 @@ void LedsOffAll(void)
 
 int LedsIsOff(int led)
 {
-    if ((led>= 1 ) && (led<= 16))
-    {
-        if (*puerto && LedToMask(led))
-            return 0;
-        else    
-            return 1;
-    }
-    else
-    {
-        RegistrarError(0, __FUNCTION__, __LINE__ , "Numero de led invalido");
-    }
-    return -1;
+    int LedMask = LedToMask(led);
+    
+    if (LedMask == 0)
+        return LED_NUM_ERROR;
+    
+    if (*puerto && LedMask)
+        return LED_OFF_STATE;
+    else    
+        return LED_ON_STATE;
 }
 
 int LedsIsOn(int led)
 {
-    if ((led>= 1 ) && (led<= 16))
-    {
-        if (*puerto && LedToMask(led))
-            return 1;
-        else    
-            return 0;
-    }
+    int LedState = LedsIsOff(led);
+    
+    if (LedState == LED_NUM_ERROR)
+        return LED_NUM_ERROR;
     else
-    {
-        RegistrarError(0, __FUNCTION__, __LINE__ , "Numero de led invalido");
-    }
-    return -1;
+        return !LedState;
 }
